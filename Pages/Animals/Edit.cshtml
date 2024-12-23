@@ -5,13 +5,18 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
 <h4>Animal</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Edit Animal</h5>
+            </div>
+            <div class="card-body">
+                <h4>Animal Details</h4>
+                <hr />
+                <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Animal.ID" />
             <div class="form-group">
@@ -39,15 +44,31 @@
                 <input asp-for="Animal.Health" class="form-control" />
                 <span asp-validation-for="Animal.Health" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+            <!-- Câmpul pentru imagine -->
+                    <div class="form-group">
+                        <label asp-for="AnimalPhoto" class="control-label">Upload New Photo</label>
+                        <input type="file" asp-for="AnimalPhoto" class="form-control" />
+                    </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
+                    @if (Model.Animal.AnimalPhoto != null && Model.Animal.AnimalPhoto.Length > 0)
+                    {
+                        <div class="form-group">
+                            <label><strong>Current Photo:</strong></label><br />
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Animal.AnimalPhoto)" alt="Animal Photo" class="img-thumbnail" style="max-width:200px;" />
+                        </div>
+                    }
+
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-save" />
+            </div>
+          </form>
+        </div>
+            <div class="card-footer">
+                <a asp-page="./Index" class="btn btn-back">Back</a>
+            </div>
+      </div>
+    </div>
 </div>
 
 @section Scripts {

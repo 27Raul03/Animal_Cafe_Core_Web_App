@@ -1,49 +1,37 @@
 ﻿@page
 @model Animal_Cafe_Core_Web_App.Pages.Animals.DetailsModel
 
-@{
-    ViewData["Title"] = "Details";
-}
 
-<h1>Details</h1>
+<div class="col-md-4">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title">@Model.Animal.Name</h5>
+        </div>
+        <div class="card-body">
 
-<div>
-    <h4>Animal</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Animal.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Animal.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Animal.Breed)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Animal.Breed)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Animal.Age)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Animal.Age)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Animal.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Animal.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Animal.Health)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Animal.Health)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Animal.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
-</div>
+            <div>
+                <strong>Breed:</strong> @Model.Animal.Breed
+            </div>
+            <div>
+                <strong>Age:</strong> @Model.Animal.Age
+            </div>
+            <div>
+                <strong>Description:</strong> @Model.Animal.Description
+            </div>
+            <div>
+                <strong>Health:</strong> @Model.Animal.Health
+            </div>
+            <br/>
+            @if (Model.Animal.AnimalPhoto != null && Model.Animal.AnimalPhoto.Length > 0)
+            {
+                <div>
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Animal.AnimalPhoto)" alt="@Model.Animal.Name" style="width:200px; height:auto;" />
+                </div>
+            }
+            <br />
+            <a asp-page="./Index" class="btn btn-back">Back</a>
+            </div>
+        </div>
+ </div>
+
+

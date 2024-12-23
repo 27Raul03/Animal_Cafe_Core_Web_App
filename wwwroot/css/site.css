@@ -18,5 +18,37 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url("animalTransp.png");
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+.card {
+    border: none !important;
+}
+.card-header, .card-footer {
+   background-color:#a28f70;
+   margin:0;
+}
+.card-body {
+    background-color:#d3bd9a;
+}
+.btn-edit {
+    background-color: #eadca6;
+}
+.btn-details {
+    background-color: #e2c275;
+}
+.btn-delete {
+    background-color: #c36a2d;
+}
+.btn-save, .btn-create {
+    background-color: #e79a58;
+}
+.btn-back {
+    background-color: #e0ab5b;
+}
+.btn-add{
+    background-color:sandybrown;
 }

@@ -30,11 +30,6 @@ namespace Animal_Cafe_Core_Web_App.Pages.Clients
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
             _context.Client.Add(Client);
             await _context.SaveChangesAsync();
 

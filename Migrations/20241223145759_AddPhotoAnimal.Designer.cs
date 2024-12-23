@@ -4,6 +4,7 @@ using Animal_Cafe_Core_Web_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Animal_Cafe_Core_Web_App.Migrations
 {
     [DbContext(typeof(Animal_Cafe_Core_Web_AppContext))]
-    partial class Animal_Cafe_Core_Web_AppContextModelSnapshot : ModelSnapshot
+    [Migration("20241223145759_AddPhotoAnimal")]
+    partial class AddPhotoAnimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -28,7 +28,7 @@ namespace Animal_Cafe_Core_Web_App.Pages.Reviews
                 return NotFound();
             }
 
-            var review = await _context.Review.FirstOrDefaultAsync(m => m.ID == id);
+            var review = await _context.Review.Include(r=>r.Client).Include(r=>r.Animal).FirstOrDefaultAsync(m => m.ID == id);
             if (review == null)
             {
                 return NotFound();

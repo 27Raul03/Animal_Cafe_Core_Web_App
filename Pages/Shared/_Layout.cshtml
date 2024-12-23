@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Animal_Cafe_Core_Web_App.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body> 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color:#c48c61;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3" style="background-color:#c48c61;">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index"><img style="width:50px; height:50px;" src="images/animalCafe.png" /></a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index"><img style="width:50px; height:50px;" src="~/animalCafe.png" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,19 +20,19 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Animals/Index">Animals</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Animals/Index"><strong>Animals</strong></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Clients/Index">Clients</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Clients/Index"><strong>Clients</strong></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index">Products</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index"><strong>Products</strong></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Reservations/Index">Reservations</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Reservations/Index"><strong>Reservations</strong></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Reviews/Index">Reviews</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Reviews/Index"><strong>Reviews</strong></a>
                         </li>
                         
                     </ul>
@@ -46,9 +46,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-white">
         <div class="container">
-            &copy; 2024 - Animal_Cafe_Core_Web_App - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <strong> &copy; 2024 - Animal_Cafe_Core_Web_App - <a asp-area="" asp-page="/Privacy">Privacy</a></strong>
         </div>
     </footer>
 

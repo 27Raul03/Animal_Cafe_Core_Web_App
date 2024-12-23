@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Animal_Cafe_Core_Web_App.Data;
 using Animal_Cafe_Core_Web_App.Models;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Animal_Cafe_Core_Web_App.Pages.Animals
 {
@@ -23,6 +25,9 @@ namespace Animal_Cafe_Core_Web_App.Pages.Animals
         [BindProperty]
         public Animal Animal { get; set; } = default!;
 
+        [BindProperty]
+        public IFormFile? AnimalPhoto { get; set; } // Pentru încărcarea imaginii
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -30,7 +35,7 @@ namespace Animal_Cafe_Core_Web_App.Pages.Animals
                 return NotFound();
             }
 
-            var animal =  await _context.Animal.FirstOrDefaultAsync(m => m.ID == id);
+            var animal = await _context.Animal.FirstOrDefaultAsync(m => m.ID == id);
             if (animal == null)
             {
                 return NotFound();
@@ -39,8 +44,6 @@ namespace Animal_Cafe_Core_Web_App.Pages.Animals
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -48,7 +51,27 @@ namespace Animal_Cafe_Core_Web_App.Pages.Animals
                 return Page();
             }
 
-            _context.Attach(Animal).State = EntityState.Modified;
+            var animalToUpdate = await _context.Animal.FirstOrDefaultAsync(m => m.ID == Animal.ID);
+
+            if (animalToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            // Actualizează doar proprietățile relevante
+            animalToUpdate.Name = Animal.Name;
+            animalToUpdate.Breed = Animal.Breed;
+            animalToUpdate.Age = Animal.Age;
+
+            // Salvează imaginea doar dacă există un fișier încărcat
+            if (AnimalPhoto != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await AnimalPhoto.CopyToAsync(memoryStream);
+                    animalToUpdate.AnimalPhoto = memoryStream.ToArray();
+                }
+            }
 
             try
             {

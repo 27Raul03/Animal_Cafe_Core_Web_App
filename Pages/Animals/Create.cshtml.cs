@@ -1,38 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.AspNetCore.Http;
+using System.IO;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Animal_Cafe_Core_Web_App.Data;
 using Animal_Cafe_Core_Web_App.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
+using Animal_Cafe_Core_Web_App.Data;
 
 namespace Animal_Cafe_Core_Web_App.Pages.Animals
 {
     public class CreateModel : PageModel
     {
-        private readonly Animal_Cafe_Core_Web_App.Data.Animal_Cafe_Core_Web_AppContext _context;
+        private readonly Animal_Cafe_Core_Web_AppContext _context;
 
-        public CreateModel(Animal_Cafe_Core_Web_App.Data.Animal_Cafe_Core_Web_AppContext context)
+        public CreateModel(Animal_Cafe_Core_Web_AppContext context)
         {
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
+        [BindProperty]
+        public Animal Animal { get; set; }
 
         [BindProperty]
-        public Animal Animal { get; set; } = default!;
+        public IFormFile AnimalPhoto { get; set; } 
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
+        public void OnGet()
+        {
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            // Salvează imaginea ca array de bytes
+            if (AnimalPhoto != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await AnimalPhoto.CopyToAsync(memoryStream);
+                    Animal.AnimalPhoto = memoryStream.ToArray();
+                }
             }
 
             _context.Animal.Add(Animal);

@@ -5,50 +5,34 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-white">Reviews</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-add">Add Review</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Review[0].Rating)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Review[0].Comments)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Review[0].Client)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Review[0].Animal)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Review) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comments)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Animal.ID)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var review in Model.Review)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <span class="badge text-dark" style="background-color:#a8896c">@review.Rating / 5</span>
+                </div>
+                <div class="card-body">
+                    <p><strong>Breed:</strong> @review.Comments</p>
+                    @if(@review.ClientID != null){
+                    <p><strong>Review by:</strong> @review.Client.Name</p>
+                    }
+                    @if(@review.AnimalID != null){
+                    <p><strong>For Animal:</strong> @review.Animal.Name</p>
+                    }
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-edit" asp-page="./Edit" asp-route-id="@review.ID">Edit</a>
+                    <a class="btn btn-details" asp-page="./Details" asp-route-id="@review.ID">Details</a>
+                    <a class="btn btn-delete" asp-page="./Delete" asp-route-id="@review.ID">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
