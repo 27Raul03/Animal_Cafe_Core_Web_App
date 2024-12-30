@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Animal_Cafe_Core_Web_App.Data;
 using Animal_Cafe_Core_Web_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Animal_Cafe_Core_Web_App.Pages.Reviews
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly Animal_Cafe_Core_Web_App.Data.Animal_Cafe_Core_Web_AppContext _context;
@@ -21,8 +23,8 @@ namespace Animal_Cafe_Core_Web_App.Pages.Reviews
 
         public IActionResult OnGet()
         {
-        ViewData["AnimalID"] = new SelectList(_context.Animal, "ID", "ID");
-        ViewData["ClientID"] = new SelectList(_context.Client, "ID", "ID");
+        ViewData["AnimalID"] = new SelectList(_context.Animal, "ID", "Name");
+        ViewData["ClientID"] = new SelectList(_context.Client, "ID", "Name");
             return Page();
         }
 

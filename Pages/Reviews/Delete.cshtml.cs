@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Animal_Cafe_Core_Web_App.Data;
 using Animal_Cafe_Core_Web_App.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Animal_Cafe_Core_Web_App.Pages.Reviews
 {
     public class DeleteModel : PageModel
     {
         private readonly Animal_Cafe_Core_Web_App.Data.Animal_Cafe_Core_Web_AppContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public DeleteModel(Animal_Cafe_Core_Web_App.Data.Animal_Cafe_Core_Web_AppContext context)
+        public DeleteModel(Animal_Cafe_Core_Web_App.Data.Animal_Cafe_Core_Web_AppContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [BindProperty]
@@ -29,7 +32,7 @@ namespace Animal_Cafe_Core_Web_App.Pages.Reviews
                 return NotFound();
             }
 
-            var review = await _context.Review.FirstOrDefaultAsync(m => m.ID == id);
+            var review = await _context.Review.Include(r => r.Client).FirstOrDefaultAsync(m => m.ID == id);
 
             if (review == null)
             {
@@ -39,6 +42,19 @@ namespace Animal_Cafe_Core_Web_App.Pages.Reviews
             {
                 Review = review;
             }
+
+            var currentClient = await _userManager.GetUserAsync(User);
+            UserManager<IdentityUser> userManager;
+            if (currentClient == null)
+            {
+                return RedirectToPage("/Error", new { errorMessage = "Please login!" });
+            }
+            
+            if(review.Client.Email != currentClient.Email)
+            {
+                return RedirectToPage("/Error", new { errorMessage = "Only the author of the review can delete it" });  
+            }
+
             return Page();
         }
 

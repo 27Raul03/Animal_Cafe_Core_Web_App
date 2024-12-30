@@ -10,45 +10,25 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].Category)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Product) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var product in Model.Product)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+
+                    <p><strong>Product Name</strong> @product.Name</p>
+
+                    <p><strong>Pruduct Price</strong> @product.Price</p>
+
+                    <p><strong>Product Category</strong> @product.Category</p>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-edit" asp-page="./Edit" asp-route-id="@product.ID">Edit</a>
+                    <a class="btn btn-details" asp-page="./Details" asp-route-id="@product.ID">Details</a>
+                    <a class="btn btn-delete" asp-page="./Delete" asp-route-id="@product.ID">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

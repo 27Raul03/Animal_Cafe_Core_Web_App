@@ -45,10 +45,6 @@ namespace Animal_Cafe_Core_Web_App.Pages.Products
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
             _context.Attach(Product).State = EntityState.Modified;
 

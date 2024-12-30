@@ -28,7 +28,7 @@ namespace Animal_Cafe_Core_Web_App.Pages.Reservations
                 return NotFound();
             }
 
-            var reservation = await _context.Reservation.FirstOrDefaultAsync(m => m.ID == id);
+            var reservation = await _context.Reservation.Include(r => r.Client).Include(r => r.YourBuddy).FirstOrDefaultAsync(m => m.ID == id);
             if (reservation == null)
             {
                 return NotFound();

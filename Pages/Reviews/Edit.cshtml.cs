@@ -34,6 +34,7 @@ namespace Animal_Cafe_Core_Web_App.Pages.Reviews
             }
 
             var review =  await _context.Review.Include(r=>r.Client).FirstOrDefaultAsync(m => m.ID == id);
+
             if (review == null)
             {
                 return NotFound();
@@ -41,7 +42,12 @@ namespace Animal_Cafe_Core_Web_App.Pages.Reviews
 
             var currentClient = await _userManager.GetUserAsync(User);
             UserManager<IdentityUser> userManager;
-                if (currentClient == null || review.Client.Email != currentClient.Email)
+                if (currentClient == null)
+            {
+                return RedirectToPage("/Error", new { errorMessage = "Please login!" });
+            }
+
+            if (review.Client.Email != currentClient.Email)
             {
                 return RedirectToPage("/Error", new { errorMessage = "Only the author of the review can edit it" });
             }

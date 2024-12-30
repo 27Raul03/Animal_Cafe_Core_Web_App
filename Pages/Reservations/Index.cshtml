@@ -10,51 +10,28 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Reservation[0].NoOfClients)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reservation[0].ReservationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reservation[0].FavouriteAnimal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reservation[0].Client)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reservation[0].YourBuddy)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Reservation) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoOfClients)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReservationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FavouriteAnimal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YourBuddy.ID)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var reservation in Model.Reservation)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    @if (@reservation.ClientID != null)
+                    {
+                        <p><strong>Reservation Name</strong> @reservation.Client.Name</p>
+                    }
+                    @if (@reservation.AnimalID != null)
+                    {
+                        <p><strong>Animal Name</strong> @reservation.YourBuddy.Name</p>
+                    }
+                    <p><strong>Reservation Date</strong> @reservation.ReservationDate</p>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-edit" asp-page="./Edit" asp-route-id="@reservation.ID">Edit</a>
+                    <a class="btn btn-details" asp-page="./Details" asp-route-id="@reservation.ID">Details</a>
+                    <a class="btn btn-delete" asp-page="./Delete" asp-route-id="@reservation.ID">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

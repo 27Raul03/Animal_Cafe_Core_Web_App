@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Animal_Cafe_Core_Web_App.Pages.Reservations
 {
-    [Authorize(Roles = "User")]
+    [Authorize]
 
     public class CreateModel : PageModel
     {
@@ -24,8 +24,8 @@ namespace Animal_Cafe_Core_Web_App.Pages.Reservations
 
         public IActionResult OnGet()
         {
-        ViewData["ClientID"] = new SelectList(_context.Client, "ID", "ID");
-        ViewData["AnimalID"] = new SelectList(_context.Animal, "ID", "ID");
+        ViewData["ClientID"] = new SelectList(_context.Client, "ID", "Name");
+        ViewData["AnimalID"] = new SelectList(_context.Animal, "ID", "Name");
             return Page();
         }
 
@@ -35,10 +35,6 @@ namespace Animal_Cafe_Core_Web_App.Pages.Reservations
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
             _context.Reservation.Add(Reservation);
             await _context.SaveChangesAsync();
