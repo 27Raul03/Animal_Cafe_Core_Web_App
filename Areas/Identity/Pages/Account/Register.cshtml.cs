@@ -18,6 +18,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Animal_Cafe_Core_Web_App.Data;
+using Animal_Cafe_Core_Web_App.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Animal_Cafe_Core_Web_App.Areas.Identity.Pages.Account
 {
@@ -29,13 +32,15 @@ namespace Animal_Cafe_Core_Web_App.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly Animal_Cafe_Core_Web_AppContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            Animal_Cafe_Core_Web_AppContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -43,6 +48,7 @@ namespace Animal_Cafe_Core_Web_App.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -51,6 +57,7 @@ namespace Animal_Cafe_Core_Web_App.Areas.Identity.Pages.Account
         /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
+        public IList<AuthenticationScheme> ExternalRegisters { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -122,6 +129,14 @@ namespace Animal_Cafe_Core_Web_App.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    var client = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                    var existingClient = await _context.Client.FirstOrDefaultAsync(c => c.Email == Input.Email);
+                    if (existingClient == null)
+                    {
+                        var newClient = new Client { Email = Input.Email, Name = "New User", PhoneNumber = "07xxxxxxxx" };
+                        _context.Client.Add(newClient);
+                        await _context.SaveChangesAsync();
+                    }
                     var role = await _userManager.AddToRoleAsync(user, "User");
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
