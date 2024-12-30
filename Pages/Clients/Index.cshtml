@@ -8,20 +8,22 @@
 <h1>Index</h1>
 
 <div class="row">
-    @foreach (var client in Model.Client)
+    @foreach (var client in Model.ClientList)
     {
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
-
-                    <p><strong>Client Name</strong> @client.Name</p>
-
-                    <p><strong>Client Email</strong> @client.Email</p>
-
-                    <p><strong>Client Phone Number</strong> @client.PhoneNumber</p>
+                    <p><strong>Client Name:</strong> @client.Name</p>
+                    <p><strong>Client Email:</strong> @client.Email</p>
+                    <p><strong>Client Phone Number:</strong> @client.PhoneNumber</p>
                 </div>
                 <div class="card-footer">
-                    <a class="btn btn-delete" asp-page="./Delete" asp-route-id="@client.ID">Delete</a>
+                    @if (client.Email != null)
+                    {
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@client.ID" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    } 
                 </div>
             </div>
         </div>

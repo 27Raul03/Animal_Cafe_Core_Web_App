@@ -53,7 +53,7 @@ namespace Animal_Cafe_Core_Web_App.Pages.Reservations
 
             if (reservation.Client.Email != currentClient.Email)
             {
-                return RedirectToPage("/Error", new { errorMessage = "Only the author of the review can delete it" });
+                return RedirectToPage("/Error", new { errorMessage = "Only the author of the reservation can delete it" });
             }
 
             return Page();
