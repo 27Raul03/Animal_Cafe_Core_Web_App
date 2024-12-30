@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Animal_Cafe_Core_Web_App.Data;
 using Animal_Cafe_Core_Web_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Animal_Cafe_Core_Web_App.Pages.Products
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         private readonly Animal_Cafe_Core_Web_App.Data.Animal_Cafe_Core_Web_AppContext _context;

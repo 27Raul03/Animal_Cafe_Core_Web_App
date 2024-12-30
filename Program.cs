@@ -5,7 +5,11 @@ using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AllowAnonymousToPage("/Animals");
+    options.Conventions.AllowAnonymousToPage("/Reviews");
+});
 
 builder.Services.AddDbContext<Animal_Cafe_Core_Web_AppContext>(options =>
     options.UseSqlServer(
@@ -18,6 +22,7 @@ builder.Services.AddDbContext<Animal_CafeIdentityContext>(options =>
         ?? throw new InvalidOperationException("Connection string 'Animal_Cafe_Core_Web_AppContext' not found.")));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<Animal_CafeIdentityContext>();
 
 var app = builder.Build();

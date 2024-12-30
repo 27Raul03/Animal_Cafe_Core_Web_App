@@ -5,9 +5,11 @@ using Animal_Cafe_Core_Web_App.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
 using Animal_Cafe_Core_Web_App.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Animal_Cafe_Core_Web_App.Pages.Animals
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly Animal_Cafe_Core_Web_AppContext _context;

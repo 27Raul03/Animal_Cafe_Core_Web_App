@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Animal_Cafe_Core_Web_App.Data;
 using Animal_Cafe_Core_Web_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Animal_Cafe_Core_Web_App.Pages.Reservations
 {
+    [Authorize(Roles = "User")]
+
     public class CreateModel : PageModel
     {
         private readonly Animal_Cafe_Core_Web_App.Data.Animal_Cafe_Core_Web_AppContext _context;
