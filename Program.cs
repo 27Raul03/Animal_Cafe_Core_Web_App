@@ -1,16 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Animal_Cafe_Core_Web_App.Data;
+using Microsoft.AspNetCore.Identity;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorPages();
+
 builder.Services.AddDbContext<Animal_Cafe_Core_Web_AppContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Animal_Cafe_Core_Web_AppContext") ?? throw new InvalidOperationException("Connection string 'Animal_Cafe_Core_Web_AppContext' not found.")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("Animal_Cafe_Core_Web_AppContext")
+        ?? throw new InvalidOperationException("Connection string 'Animal_Cafe_Core_Web_AppContext' not found.")));
+
+builder.Services.AddDbContext<Animal_CafeIdentityContext>(options =>
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("Animal_Cafe_Core_Web_AppContext")
+        ?? throw new InvalidOperationException("Connection string 'Animal_Cafe_Core_Web_AppContext' not found.")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<Animal_CafeIdentityContext>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
@@ -23,6 +34,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
