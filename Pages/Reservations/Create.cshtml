@@ -5,48 +5,56 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Reservation</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Reservation.NoOfClients" class="control-label"></label>
-                <input asp-for="Reservation.NoOfClients" class="form-control" />
-                <span asp-validation-for="Reservation.NoOfClients" class="text-danger"></span>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Create New Reservation</h5>
             </div>
-            <div class="form-group">
-                <label asp-for="Reservation.ReservationDate" class="control-label"></label>
-                <input asp-for="Reservation.ReservationDate" class="form-control" />
-                <span asp-validation-for="Reservation.ReservationDate" class="text-danger"></span>
+            <div class="card-body">
+                <h4>Animal Details</h4>
+                <hr />
+                <form method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Reservation.NoOfClients" class="control-label"></label>
+                        <input asp-for="Reservation.NoOfClients" class="form-control" />
+                        <span asp-validation-for="Reservation.NoOfClients" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reservation.ReservationDate" class="control-label"></label>
+                        <input asp-for="Reservation.ReservationDate" class="form-control res-date text-white" />
+                        <span asp-validation-for="Reservation.ReservationDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reservation.FavouriteAnimal" class="control-label"></label>
+                        <input asp-for="Reservation.FavouriteAnimal" class="form-control" />
+                        <span asp-validation-for="Reservation.FavouriteAnimal" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reservation.ClientID" class="control-label"></label>
+                        <input asp-for="Reservation.ClientID" class="form-control" />
+                        <span asp-validation-for="Reservation.ClientID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Reservation.AnimalID" class="control-label"></label>
+                        <input asp-for="Reservation.AnimalID" class="form-control" />
+                        <span asp-validation-for="Reservation.AnimalID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-create mt-2" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Reservation.FavouriteAnimal" class="control-label"></label>
-                <input asp-for="Reservation.FavouriteAnimal" class="form-control" />
-                <span asp-validation-for="Reservation.FavouriteAnimal" class="text-danger"></span>
+            <div class="card-footer">
+                <a asp-page="./Index" class="btn btn-back mt-1">Back to List</a>
             </div>
-            <div class="form-group">
-                <label asp-for="Reservation.ClientID" class="control-label"></label>
-                <select asp-for="Reservation.ClientID" class ="form-control" asp-items="ViewBag.ClientID"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Reservation.AnimalID" class="control-label"></label>
-                <select asp-for="Reservation.AnimalID" class ="form-control" asp-items="ViewBag.AnimalID"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

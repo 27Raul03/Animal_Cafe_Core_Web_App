@@ -4,6 +4,10 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4 text-white">Welcome</h1>
+<div class="text-center container-welcome">
+    <h1 class="display-4 text-white btn-welcome fw-bold">Welcome</h1>
+    <div class="button-group d-inline">
+        <a class="btn btn-menu text-white" asp-page="/Products/Index">Menu</a>
+        <a class="btn btn-animals text-white" asp-page="/Animals/Index">Our Animals</a>
+    </div>
 </div>

@@ -24,6 +24,33 @@ body {
     background-position: center center;
     background-attachment: fixed;
 }
+h1,h2,h4{
+    color:white;
+}
+h1{
+    background-color:sandybrown;
+    opacity:80%;
+    width:250px;
+    text-align:center;
+}
+.res-date::-webkit-calendar-picker-indicator{
+    filter:invert(1);
+}
+h2 {
+    background-color: sandybrown;
+    opacity: 80%;
+    width: 350px;
+    text-align: center;
+}
+label{
+    color:white;
+    font-weight:bold;
+}
+input, select{
+    background-color:lightgray !important;
+    color:brown !important;
+}
+
 .card {
     border: none !important;
 }
@@ -44,11 +71,41 @@ body {
     background-color: #c36a2d;
 }
 .btn-save, .btn-create {
-    background-color: #e79a58;
+    background-color: #e79a58 !important;
 }
 .btn-back {
     background-color: #e0ab5b;
 }
 .btn-add{
     background-color:sandybrown;
+}
+.btn-menu, .btn-animals{
+    background-color:sandybrown;
+    opacity:70%;
+}
+.btn-menu:hover, .btn-animals:hover {
+    transition:width ease-out 2s;
+}
+.container-welcome {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+.container-welcome h1, .login-text, .register-text, .manage-text{
+    background-color:transparent;
+    opacity:100%;
+    
+}
+.login-card, .register-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+}
+.privacy-text{
+    color:lightsalmon;
 }
