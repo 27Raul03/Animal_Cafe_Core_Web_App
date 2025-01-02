@@ -33,12 +33,16 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Reservation.ClientID" class="control-label"></label>
-                        <input asp-for="Reservation.ClientID" class="form-control" />
+                        <select asp-for="Reservation.ClientID" class="form-control text-white" asp-items="ViewBag.ClientID">
+                            <option class="text-white" value="">Please select...</option>
+                        </select>
                         <span asp-validation-for="Reservation.ClientID" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Reservation.AnimalID" class="control-label"></label>
-                        <input asp-for="Reservation.AnimalID" class="form-control" />
+                        <select asp-for="Reservation.AnimalID" class="form-control text-white" asp-items="ViewBag.AnimalID">
+                            <option class="text-white" value="">Please select...</option>
+                        </select>                        
                         <span asp-validation-for="Reservation.AnimalID" class="text-danger"></span>
                     </div>
                     <div class="form-group">

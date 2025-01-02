@@ -28,7 +28,9 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Review.ClientID" class="control-label"></label>
-                        <input asp-for="Review.ClientID" class="form-control" />
+                        <select asp-for="Review.ClientID" class="form-control text-white" asp-items="ViewBag.ClientID">
+                            <option class="text-white" value="">Please select...</option>
+                        </select>
                         <span asp-validation-for="Review.ClientID" class="text-danger"></span>
                     </div>
                     <div class="form-group">
