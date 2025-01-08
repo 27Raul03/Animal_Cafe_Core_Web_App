@@ -8,7 +8,7 @@
 <h1 class="text-white">Reviews</h1>
 
 <p>
-    <a asp-page="Create" class="btn btn-add">Add Review</a>
+    <a asp-page="Create" class="btn btn-add text-white">Add Review</a>
 </p>
 <div class="row">
     @foreach (var review in Model.Review)
@@ -20,9 +20,8 @@
                 </div>
                 <div class="card-body">
                     <p><strong>Breed:</strong> @review.Comments</p>
-                    @if(@review.ClientID != null){
-                    <p><strong>Review by:</strong> @review.Client.Name</p>
-                    }
+                    <p><strong>Review by:</strong> @review.Client.Email</p>
+                    
                     @if(@review.AnimalID != null){
                     <p><strong>For Animal:</strong> @review.Animal.Name</p>
                     }

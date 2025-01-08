@@ -5,10 +5,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Reservations</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-add text-white">Create New</a>
 </p>
 <div class="row">
     @foreach (var reservation in Model.Reservation)
@@ -18,7 +18,7 @@
                 <div class="card-body">
                     @if (@reservation.ClientID != null)
                     {
-                        <p><strong>Reservation Name</strong> @reservation.Client.Name</p>
+                        <p><strong>Reservation Name</strong> @reservation.Client.Email</p>
                     }
                     @if (@reservation.AnimalID != null)
                     {

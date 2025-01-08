@@ -4,46 +4,63 @@
     ViewData["Title"] = "Create Animal";
 }
 
-<h1>Create New Animal</h1>
-
-<form method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label asp-for="Animal.Name" class="control-label"></label>
-        <input asp-for="Animal.Name" class="form-control" />
-        <span asp-validation-for="Animal.Name" class="text-danger"></span>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Create New Animal</h5>
+            </div>
+            <div class="card-body">
+                <h4>Animal Details</h4>
+                <hr />
+                <form method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Animal.Name" class="control-label"></label>
+                        <input asp-for="Animal.Name" class="form-control" />
+                        <span asp-validation-for="Animal.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Animal.Breed" class="control-label"></label>
+                        <input asp-for="Animal.Breed" class="form-control" />
+                        <span asp-validation-for="Animal.Breed" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Animal.Age" class="control-label"></label>
+                        <input asp-for="Animal.Age" class="form-control" />
+                        <span asp-validation-for="Animal.Age" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Animal.Description" class="control-label"></label>
+                        <input asp-for="Animal.Description" class="form-control" />
+                        <span asp-validation-for="Animal.Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Animal.Health" class="control-label"></label>
+                        <input asp-for="Animal.Health" class="form-control" />
+                        <span asp-validation-for="Animal.Health" class="text-danger"></span>
+                    </div>
+                    <!-- Câmpul pentru imagine -->
+                    <div class="form-group">
+                        <label asp-for="AnimalPhoto" class="control-label">Upload Photo</label>
+                        <input type="file" name="AnimalPhoto" class="form-control" />
+                        <span asp-validation-for="Animal.AnimalPhoto" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-create" />
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <a asp-page="./Index" class="btn btn-back">Back to List</a>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <label asp-for="Animal.Breed" class="control-label"></label>
-        <input asp-for="Animal.Breed" class="form-control" />
-        <span asp-validation-for="Animal.Breed" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Animal.Age" class="control-label"></label>
-        <input asp-for="Animal.Age" class="form-control" />
-        <span asp-validation-for="Animal.Age" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Animal.Description" class="control-label"></label>
-        <textarea asp-for="Animal.Description" class="form-control"></textarea>
-        <span asp-validation-for="Animal.Description" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Animal.Health" class="control-label"></label>
-        <input asp-for="Animal.Health" class="form-control" />
-        <span asp-validation-for="Animal.Health" class="text-danger"></span>
-    </div>
-
-    <!-- Câmpul pentru imagine -->
-    <div class="form-group">
-        <label for="Animal.AnimalPhoto">Upload Image</label>
-        <input type="file" name="AnimalPhoto" class="form-control" />
-        <span asp-validation-for="Animal.AnimalPhoto" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-save">Save</button>
-</form>
-
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
